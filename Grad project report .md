@@ -2,7 +2,7 @@
 
 This project involves downloading  data from the Global Biodiversity Information Facility (GBIF) and adapting it into R code in order to assess species diversity of seagrasses. The end goal is to produce a geographic plot with 100km grid cells measuring the number of different species present per cell. Because occurances included both observation and specimen data, there are some errors to account for in the raw csv file. GBIF compiles data from many different sources, some including citizen science projects. Therefore such data is subject to human error. In order to correct for this issue, we had to find a way to filter out the spatial points that fell out of the range of normal seagrass distributions (eg. points falling on land or in the middle of the ocean). Because these points were most likely incorrectly documented, they would not be considered significant. To omit such spatial points from the plot, we needed to apply a shapefile layer to the data consisting of dissolved ranges where seagrasses are found. This layer would essentially limit the seagrass occurance data to only points falling within these known ranges. 
 
-#Breaking Down the Code
+# Breaking Down the Code
 
 The first step to completing this project is to upload all needed libaries and data files into the R script.
 
@@ -106,6 +106,6 @@ add.color.bar( leg=100,cols = COLOUR, lims=c(1,22), digits=1, prompt=TRUE,title 
               lwd=4, outline=TRUE)
 ```
 
-#Final Product
+# Final Product
 Seagrass global species richness:
 ![](/Users/BriRock/Desktop/Seagrass\ Research/Plots/SR.pdf)
