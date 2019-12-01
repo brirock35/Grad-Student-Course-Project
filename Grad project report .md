@@ -108,4 +108,5 @@ add.color.bar( leg=100,cols = COLOUR, lims=c(1,22), digits=1, prompt=TRUE,title 
 
 # Final Product
 Seagrass global species richness
-![Uploading species richness.png…]()
+![seagrass SR](https://drive.google.com/drive/u/1/my-drive)
+
