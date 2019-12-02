@@ -25,33 +25,37 @@ pdf("~/Desktop/temprange1.pdf")
 
 ```
 
-The next step is to incorporate 100 km grids to the data file.
+The next step is to incorporate 100 km grids to the data file and apply the plotting function. The fishnet function creates a regular grid of locations covering the selected study area. 
 
 ```
-#reset res to 1 
 d1 <- fishnet(s, res=2)
 d1$grids <- paste0("v", 1:nrow(d1))
 plot(s)
 plot(d1,add= TRUE)
 dev.off()
 
+# the below code will write spatial vector data and will allow the data to be written out using supported drivers 
+# drivers supported based off of the local installation and the capabilities of the drivers
+
 writeOGR(d1, dsn = "/Users/darulab/Desktop/Brianna R (SPD)/Data/ShapeFiles/grids", layer = "grids_100km", driver = "ESRI Shapefile", overwrite_layer = TRUE)
  
 ```
 
-Next, we need to extract the columns in the data file that  have the desired rows of infomation (i.e. longitude, latitude, and basis of record), and create  variables for coordinates and for the string combining the data.
+Next, we need to extract the columns in the data file that have the desired rows of infomation (i.e. longitude, latitude, and basis of record), and create variables for the desired data (i.e. coordinates(df) and proj4string(df)) and reorganize the data.
 
 ```
 df <- d[,c(23,22,36)]
 names(df) <- c("lon", "lat", "basis")
+
 # the below code omits any NA's present
 df <- df[complete.cases(df),]
+
 coordinates(df) <- ~lon+lat
 proj4string(df) <- CRS("+proj=longlat +datum=WGS84")
 
 ```
 
-Now, we assign a new variable for reading in the shapefile of dissolved seagrass ranges with a layer of the seagrass occurrances.  Then, we create a  for loop that reads through  all 72 seagrass species and counts the  number of species per grid cell.
+Now, we assign a new variable for reading in the shapefile of dissolved seagrass ranges while incorporating a layer of seagrass occurrances.  Then, we create a  for loop that reads through all 72 seagrass species occurrances and counts the  number of species per grid cell.
 
 ```
 ss <- readOGR(dsn = "/Users/darulab/Desktop/Brianna R (SPD)/Data/ShapeFiles/Seagrasses_SHP_raw", layer = "SEAGRASSES")
@@ -81,27 +85,27 @@ write.csv(r, "/Users/darulab/Desktop/Brianna R (SPD)/Data/CSVs/PRESAB_100km.csv"
 Finally, the last step is to plot the data we've manipulated in geographic space.
 
 ```
+# create data frame and vector to combine grids with species richness
 mm <- data.frame(table(r$grids))
 names(mm) <- c("grids", "SR")
-
 
 index1 <- match(s1$grids, mm$grids)
 zm <- cbind(s1, mm$SR[index1])
 names(zm)[3] <- "SR"
 zm1 <- zm[zm@data$SR>0, ]
 
-
+# the below code selects for the desired color palette and creates a vector of a group of contiguous colors
 k=10
 COLOUR <- hcl.colors(k, palette = "Zissou 1")
+
+# the choropleth function discretizes the values of the quantity based on their quantities
 y = choropleth(zm1, values=zm1$SR, k)
 
-plot(wrld_simpl, col="white", border="grey")
-#plot(y, col=COLOUR[y$values],layer = "grids_100km", border = NA, add=TRUE)
-
+# the below code plots the basic geographic map that the seagrass data will be placed on
 plot(wrld_simpl, col="white", border="grey")
 plot(y, layer="SR", col=COLOUR[y$values], border = NA, add=T)
 
-
+# this code adds a color bar to help with interpretation of the species richness plot
 add.color.bar( leg=100,cols = COLOUR, lims=c(1,22), digits=1, prompt=TRUE,title = NA,
               lwd=4, outline=TRUE)
 ```
