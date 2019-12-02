@@ -35,7 +35,7 @@ plot(d1,add= TRUE)
 dev.off()
 
 # the below code will write spatial vector data and will allow the data to be written out using supported drivers 
-# drivers supported based off of the local installation and the capabilities of the drivers
+# whether drivers are supported is based off of the local installation and the capabilities of the drivers
 
 writeOGR(d1, dsn = "/Users/darulab/Desktop/Brianna R (SPD)/Data/ShapeFiles/grids", layer = "grids_100km", driver = "ESRI Shapefile", overwrite_layer = TRUE)
  
@@ -55,7 +55,7 @@ proj4string(df) <- CRS("+proj=longlat +datum=WGS84")
 
 ```
 
-Now, we assign a new variable for reading in the shapefile of dissolved seagrass ranges while incorporating a layer of seagrass occurrances.  Then, we create a  for loop that reads through all 72 seagrass species occurrances and counts the  number of species per grid cell.
+Now we assign a new variable for reading in the shapefile of dissolved seagrass ranges while incorporating a layer of seagrass occurrances.  Then, we create a for loop that reads through all 72 seagrass species occurrances and counts the  number of species per grid cell.
 
 ```
 ss <- readOGR(dsn = "/Users/darulab/Desktop/Brianna R (SPD)/Data/ShapeFiles/Seagrasses_SHP_raw", layer = "SEAGRASSES")
