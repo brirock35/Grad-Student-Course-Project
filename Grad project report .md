@@ -18,7 +18,7 @@ library(phytools)
 library(sp)
 data("wrld_simpl")
 
-
+# variable d represents the seagrass occurrances from GBIF and variable s is the shapefile of dissolved seagrass ranges
 d <- fread("/Users/darulab/Desktop/Brianna R (SPD)/SeagrassGBIF/seagrasssoccurances.csv", stringsAsFactors = FALSE)
 s <- shapefile("/Users/darulab/Desktop/Brianna R (SPD)/Data/ShapeFiles/seagrasses_dissolved/seagrasses_dissolved.shp")
 pdf("~/Desktop/temprange1.pdf")
