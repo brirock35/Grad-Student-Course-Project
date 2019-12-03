@@ -7,7 +7,6 @@ This project involves downloading  data from the Global Biodiversity Information
 The first step to completing this project is to upload all needed libaries and data files into the R script.
 
 ```
-rm(list = ls())
 library(data.table)
 library(raster)
 library(ggplot2)
