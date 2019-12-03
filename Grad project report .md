@@ -57,8 +57,12 @@ proj4string(df) <- CRS("+proj=longlat +datum=WGS84")
 Now we assign a new variable for reading in the shapefile of dissolved seagrass ranges while incorporating a layer of seagrass occurrances.  Then, we create a for loop that reads through all 72 seagrass species occurrances and counts the  number of species per grid cell.
 
 ```
+# reads OGR data source and layers it into a suitable spatial vector object (in this case "SEAGRASSES")
 ss <- readOGR(dsn = "/Users/darulab/Desktop/Brianna R (SPD)/Data/ShapeFiles/Seagrasses_SHP_raw", layer = "SEAGRASSES")
+
+# sets or retrieves projection attributes and permits spatial data to be associated with coordinate reference systems 
 proj4string(ss) <- CRS("+proj=longlat +datum=WGS84")
+
 S <- as.character(unique(ss$binomial))
 
 # for loop to count number of species per grid
