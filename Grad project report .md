@@ -40,7 +40,7 @@ writeOGR(d1, dsn = "/Users/darulab/Desktop/Brianna R (SPD)/Data/ShapeFiles/grids
  
 ```
 
-Next, we need to extract the columns in the data file that have the desired rows of infomation (i.e. longitude, latitude, and basis of record), and create variables for the desired data (i.e. coordinates(df) and proj4string(df)) and reorganize the data.
+Next, we need to extract the columns in the data file that have the desired rows of infomation (i.e. longitude, latitude, and basis of record), and utilize specific functions to retrieve the desired data (i.e. coordinates(df) and proj4string(df)) and reorganize the data.
 
 ```
 df <- d[,c(23,22,36)]
