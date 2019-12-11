@@ -58,7 +58,7 @@ Now we assign a new variable for reading in the shapefile of dissolved seagrass 
 
 ```
 # reads OGR data source and layers it into a suitable spatial vector object (in this case "SEAGRASSES")
-ss <- readOGR(dsn = "/Users/darulab/Desktop/Brianna R (SPD)/Data/ShapeFiles/Seagrasses_SHP_raw", layer = "SEAGRASSES")
+s1 <- readOGR(dsn = "/Users/darulab/Desktop/Brianna R (SPD)/Data/ShapeFiles/Seagrasses_SHP_raw", layer = "SEAGRASSES")
 
 # sets or retrieves projection attributes and permits spatial data to be associated with coordinate reference systems 
 proj4string(ss) <- CRS("+proj=longlat +datum=WGS84")
